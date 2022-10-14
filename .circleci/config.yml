@@ -25,27 +25,27 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
-    build-and-push:
-      environment:
-        DOCKER_IMAGE: myapp
-        DOCKER_TAG: latest
-        REGISTRY: localhost:5000
-      executor: docker/docker
-      steps:
-        - setup_remote_docker
-        - checkout
-        - docker/build:
-            image: $DOCKER_IMAGE
-            tag: $DOCKER_TAG
-            registry: $REGISTRY
-        - docker/push:
-            image: $DOCKER_IMAGE
-            tag: $DOCKER_TAG
-            registry: $REGISTRY
-            digest-path: /tmp/digest.txt
-        - run:
-            command: |
-              echo "Digest is: $(</tmp/digest.txt)"
+  build-and-push:
+    environment:
+      DOCKER_IMAGE: myapp
+      DOCKER_TAG: latest
+      REGISTRY: localhost:5000
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/build:
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+          registry: $REGISTRY
+      - docker/push:
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+          registry: $REGISTRY
+          digest-path: /tmp/digest.txt
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
 
   
 
