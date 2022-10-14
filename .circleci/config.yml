@@ -29,7 +29,7 @@ jobs:
     environment:
       DOCKER_IMAGE: myapp
       DOCKER_TAG: latest
-      REGISTRY: localhost:5000
+      REGISTRY: "localhost:5000"
     executor: docker/docker
     steps:
       - setup_remote_docker
