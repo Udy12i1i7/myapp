@@ -2,6 +2,9 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+orbs:
+  docker: circleci/docker@2.1.4
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -22,16 +25,35 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
+    build-and-push:
+      environment:
+        DOCKER_IMAGE: myapp
+        DOCKER_TAG: latest
+        REGISTRY: localhost:5000
+      executor: docker/docker
+      steps:
+        - setup_remote_docker
+        - checkout
+        - docker/build:
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+          registry: $REGISTRY
+        - docker/push:
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+          registry: $REGISTRY
+          digest-path: /tmp/digest.txt
+        - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
 
-    
-
+  
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  testing:
-    jobs:
-      - runner-test
-  say-hello-workflow:
+  main:
     jobs:
       - say-hello
+      - runner-test
+      - build-and-push
