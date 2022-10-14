@@ -40,7 +40,8 @@ jobs:
           registry: $REGISTRY:5000
       - docker/push:
           image: $DOCKER_IMAGE
-          registry: $REGISTRY:5000
+          tag: $DOCKER_TAG
+          registry: localhost:5000
           digest-path: /tmp/digest.txt
       - run:
           command: |
