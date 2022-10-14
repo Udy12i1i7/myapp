@@ -35,17 +35,17 @@ jobs:
         - setup_remote_docker
         - checkout
         - docker/build:
-          image: $DOCKER_IMAGE
-          tag: $DOCKER_TAG
-          registry: $REGISTRY
+            image: $DOCKER_IMAGE
+            tag: $DOCKER_TAG
+            registry: $REGISTRY
         - docker/push:
-          image: $DOCKER_IMAGE
-          tag: $DOCKER_TAG
-          registry: $REGISTRY
-          digest-path: /tmp/digest.txt
+            image: $DOCKER_IMAGE
+            tag: $DOCKER_TAG
+            registry: $REGISTRY
+            digest-path: /tmp/digest.txt
         - run:
-          command: |
-            echo "Digest is: $(</tmp/digest.txt)"
+            command: |
+              echo "Digest is: $(</tmp/digest.txt)"
 
   
 
