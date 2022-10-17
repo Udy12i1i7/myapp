@@ -29,7 +29,7 @@ jobs:
     environment:
       DOCKER_IMAGE: myapp
       DOCKER_TAG: latest
-      REGISTRY: localhost
+      REGISTRY: 103.5.209.44
     executor: docker/docker
     steps:
       - setup_remote_docker
@@ -41,7 +41,7 @@ jobs:
       - docker/push:
           image: $DOCKER_IMAGE
           tag: $DOCKER_TAG
-          registry: localhost:5000
+          registry: 103.5.209.44:5000
           digest-path: /tmp/digest.txt
       - run:
           command: |
