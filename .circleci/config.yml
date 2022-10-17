@@ -1,11 +1,59 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine
+# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-workflows:
-  testing:
-    jobs:
-      - runner-test
+
+orbs:
+  docker: circleci/docker@2.1.4
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   runner-test:
     machine: true
     resource_class: udy12i1i7/project-demo
     steps:
       - run: echo "Hi I'm on Runners!"
+  say-hello:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: cimg/base:stable
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+  build-and-push:
+    environment:
+      DOCKER_IMAGE: myapp
+      DOCKER_TAG: latest
+      REGISTRY: localhost
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/build:
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+          registry: $REGISTRY:5000
+      - docker/push:
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+          registry: localhost:5000
+          digest-path: /tmp/digest.txt
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
+
+  
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  main:
+    jobs:
+      - say-hello
+      - runner-test
+      - build-and-push
