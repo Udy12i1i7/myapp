@@ -41,7 +41,7 @@ jobs:
       - docker/push:
           image: $DOCKER_IMAGE
           tag: $DOCKER_TAG
-          registry: 103.5.209.44:5000
+          registry: http://103.5.209.44:5000
           digest-path: /tmp/digest.txt
       - run:
           command: |
