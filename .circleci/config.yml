@@ -37,7 +37,6 @@ jobs:
       - docker/build:
           image: $DOCKER_IMAGE
           tag: $DOCKER_TAG
-          registry: $REGISTRY:5000
       - docker/push:
           image: $DOCKER_IMAGE
           tag: $DOCKER_TAG
