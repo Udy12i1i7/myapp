@@ -32,6 +32,8 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
+      - docker/check:
+          registry: "103.5.209.44:5000"
       - docker/build:
           image: $DOCKER_IMAGE
           tag: $DOCKER_TAG
