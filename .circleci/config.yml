@@ -29,7 +29,7 @@ jobs:
     environment:
       DOCKER_IMAGE: myapp
       DOCKER_TAG: latest
-      REGISTRY: "http://103.5.209.44:5000"
+      REGISTRY: "103.5.209.44:5000"
     executor: docker/docker
     steps:
       - setup_remote_docker
