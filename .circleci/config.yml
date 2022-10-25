@@ -28,12 +28,16 @@ jobs:
       DOCKER_IMAGE: myapp
       DOCKER_TAG: latest
       REGISTRY: "103.5.209.44:5000"
+      DOCKER_LOGIN: udy
+      DOCKER_PASSWORD: 123
     executor: docker/docker
     steps:
       - setup_remote_docker
       - checkout
       - docker/check:
           registry: "103.5.209.44:5000"
+          docker-username: $DOCKER_LOGIN
+          docker-password: $DOCKER_PASSWORD
       - docker/build:
           image: $DOCKER_IMAGE
           tag: $DOCKER_TAG
