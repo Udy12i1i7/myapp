@@ -39,7 +39,7 @@ jobs:
       - docker/push:
           image: $DOCKER_IMAGE
           tag: $DOCKER_TAG
-          registry: "registry.sunteco.tech/myapp/"
+          registry: "registry.sunteco.tech/myapp"
           digest-path: /tmp/digest.txt
       - run:
           command: |
