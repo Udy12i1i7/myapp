@@ -27,7 +27,7 @@ jobs:
     environment:
       DOCKER_IMAGE: myapp
       DOCKER_TAG: latest
-      REGISTRY: "registry.sunteco.tech"
+      REGISTRY: "registry.sunteco.tech/myapp"
     executor: docker/docker
     steps:
       - setup_remote_docker
@@ -39,7 +39,7 @@ jobs:
       - docker/push:
           image: $DOCKER_IMAGE
           tag: $DOCKER_TAG
-          registry: "registry.sunteco.tech"
+          registry: "registry.sunteco.tech/myapp"
           digest-path: /tmp/digest.txt
       - run:
           command: |
