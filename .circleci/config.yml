@@ -33,8 +33,9 @@ jobs:
       - setup_remote_docker
       - checkout
       - docker/check:
-         docker-username: DOCKER_LOGIN
-         docker-password: DOCKER_PASSWORD
+          registry: "registry.sunteco.tech"
+          docker-username: DOCKER_LOGIN
+          docker-password: DOCKER_PASSWORD
       - docker/build:
           image: $DOCKER_IMAGE
           tag: $DOCKER_TAG
