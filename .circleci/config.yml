@@ -27,7 +27,7 @@ jobs:
     environment:
       DOCKER_IMAGE: myapp
       DOCKER_TAG: latest
-      REGISTRY: "registry.sunteco.tech/myapp/"
+      REGISTRY: "registry.sunteco.tech/myapp"
     executor: docker/docker
     steps:
       - setup_remote_docker
