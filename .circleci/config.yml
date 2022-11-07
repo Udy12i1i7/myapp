@@ -50,7 +50,7 @@ jobs:
             echo "Digest is: $(</tmp/digest.txt)"
   build:
     docker:
-      - image: $REGISTRY:@DOCKER_IMAGE
+      - image: "registry.sunteco.tech/myapp/myapp"
     resource_class: udy12i1i7/project-demo
     steps:
       - checkout
