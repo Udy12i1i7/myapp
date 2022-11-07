@@ -63,4 +63,10 @@ workflows:
       # - say-hello
       # - runner-test
       - build-and-push
-      - build
+      - build:
+        requires:
+          - build-and-push
+        filters:
+          branches:
+            only:
+              - main
