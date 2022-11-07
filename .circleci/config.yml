@@ -51,7 +51,7 @@ jobs:
   build:
     docker:
       - image: registry.sunteco.tech/myapp/myapp
-    resource_class: namespace/my-rc
+    resource_class: udy12i1i7/project-demo
     steps:
       - checkout
       - run: echo "Hi I'm on Runners!"
