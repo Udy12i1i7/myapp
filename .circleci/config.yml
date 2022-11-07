@@ -64,9 +64,9 @@ workflows:
       # - runner-test
       - build-and-push
       - build:
-        requires:
-          - build-and-push
-        filters:
-          branches:
-            only:
-              - main
+          requires:
+            - build-and-push
+          filters:
+            branches:
+              only:
+                - main
