@@ -51,7 +51,7 @@ jobs:
   build:
     docker:
       - image: $REGISTRY:@DOCKER_IMAGE
-    resource_class: default/project-demo
+    resource_class: udy12i1i7/project-demo
     steps:
       - checkout
       - run: echo "Hi I'm on Runners!"
